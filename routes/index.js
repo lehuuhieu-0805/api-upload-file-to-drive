@@ -51,8 +51,10 @@ function route(app) {
       const drive = google.drive({ version: 'v3', auth: oauth2Client });
 
       async function uploadFile(file) {
+        const randomName = new Date().getTime();
+        const extension = file.originalname.split('.').pop();
         const fileMetadata = {
-          name: file.originalname,
+          name: randomName + '.' + extension,
           // set folder Id
           parents: [FOLDER_ID]
         };
